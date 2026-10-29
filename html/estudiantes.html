@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Estudiantes</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/estudiantes.css" />
+    <link rel="stylesheet" href="../css/asistencia.css" />
+  </head>
+  <body>
+    <header class="cabeceraEstudiante">
+      <h1><i class="fas fa-clock"></i>Social Hours</h1>
+      <!-- Grupo de la derecha: modo oscuro + perfil -->
+      <div class="cabeceraAcciones">
+        <button
+          type="button"
+          id="btnModoOscuro"
+          class="btnModoOscuro"
+          title="Modo oscuro"
+          aria-label="Activar modo oscuro"
+          aria-pressed="false"
+        >
+          <i class="fas fa-moon" id="iconoModo"></i>
+        </button>
+
+        <div class="cabeceraUsuario">
+          <!-- Perfil: al hacer clic muestra la opción de cerrar sesión -->
+          <button
+            type="button"
+            id="btnPerfil"
+            class="btnPerfil"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <img
+              id="fotoPerfil"
+              class="fotoPerfil"
+              alt=""
+              referrerpolicy="no-referrer"
+              style="display: none"
+            />
+            <i class="fas fa-user" id="iconoPerfil"></i> Perfil
+          </button>
+          <div id="menuDesplegable" class="menuDesplegable">
+            <button type="button" id="btnCerrarSesion">
+              <i class="fas fa-sign-out-alt"></i>Cerrar Sesión
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <nav class="barraEstudiante">
+      <img src="../img/img.png" alt="Logo " />
+      <a href="#" data-target="Historial" class="barraElemento">
+        <i class="fas fa-book"></i>Historial</a
+      >
+      <a href="#" data-target="Horas" class="barraElemento"
+        ><i class="fas fa-clock"></i>Horas</a
+      >
+      <a href="#" data-target="Asistencia" class="barraElemento"
+        ><i class="fas fa-calendar-check"></i>Asistencia</a
+      >
+      <a href="#" data-target="Alertas" class="barraElemento"
+        ><i class="fas fa-bell"></i>Alertas<span
+          id="badgeAlertas"
+          class="badgeAlertas"
+          style="display: none"
+        ></span
+      ></a>
+      <a href="#" data-target="Validaciones" class="barraElemento"
+        ><i class="fas fa-check"></i>Validaciones</a
+      >
+    </nav>
+    <main>
+      <section id="Historial" class="historialRegistro">
+        <div class="tablaHistorial">
+          <table>
+            <thead>
+              <tr>
+                <th>Nombre Estudiante</th>
+                <th>NIE</th>
+                <th>Grado</th>
+                <th>Sección</th>
+                <th>Servicio Social</th>
+                <th>Horas</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody id="registroAlumno"></tbody>
+          </table>
+        </div>
+      </section>
+      <section id="Horas" class="horasRegistro">
+        <div class="horaEstudiante">
+          <table>
+            <thead>
+              <tr>
+                <th>Nombre de Estudiante</th>
+                <th>Nie</th>
+                <th>Horas</th>
+              </tr>
+            </thead>
+            <tbody id="registroHoras"></tbody>
+          </table>
+        </div>
+      </section>
+      <section id="Asistencia" class="historialRegistro">
+        <div id="resumenAsistencia" class="resumenAsistencia"></div>
+        <div class="tablaHistorial">
+          <table>
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Entrada</th>
+                <th>Salida</th>
+                <th>Horas</th>
+                <th>Asistencia</th>
+              </tr>
+            </thead>
+            <tbody id="registroAsistencia"></tbody>
+          </table>
+        </div>
+      </section>
+      <section id="Alertas" class="historialRegistro">
+        <div class="alertasEncabezado">
+          <h2>Mis alertas</h2>
+          <button type="button" id="btnLeerTodas" class="btnLeerTodas">
+            Marcar todas como leídas
+          </button>
+        </div>
+        <div id="listaAlertas" class="listaAlertas"></div>
+      </section>
+      <section id="Validaciones" class="historialRegistro">
+        <div class="valEstTarjeta">
+          <div class="valEstTarjetaCuerpo">
+            <h2>Validación</h2>
+            <p>Consulta tu validación de horas sociales.</p>
+          </div>
+          <button type="button" id="btnAbrirValidacion">
+            Abrir validación
+          </button>
+        </div>
+
+        <div id="modalValidacion" class="valEstModal">
+          <div class="valEstContenido">
+            <h2>Validación</h2>
+            <p>Para que puedas finalizar tu servicio social</p>
+
+            <h1>VALIDACIÓN DE HORAS SOCIALES</h1>
+
+            <div class="valEstInfo">
+              <p>
+                <strong>Nombre del estudiante:</strong>
+                <span class="valEstCampo" id="valNombre"></span>
+              </p>
+              <p>
+                <strong>NIE:</strong>
+                <span class="valEstCampo" id="valNie"></span>
+              </p>
+              <p>
+                <strong>Grado:</strong>
+                <span class="valEstCampo" id="valGrado"></span>
+              </p>
+              <p>
+                <strong>Horas completadas:</strong>
+                <span class="valEstCampo" id="valHoras"></span>
+              </p>
+              <p>
+                <strong>Fecha de finalización:</strong>
+                <span class="valEstCampo" id="valFecha"></span>
+              </p>
+              <p>
+                <strong>Proyecto/Servicio Social:</strong>
+                <span class="valEstCampo" id="valServicio"></span>
+              </p>
+            </div>
+
+            <div class="valEstFirma">
+              <p>_________________________</p>
+              <p><strong>Firma del Coordinador</strong></p>
+              <p>Fecha: <span class="valEstCampo"></span></p>
+            </div>
+            <p class="valEstNota">
+              Este documento certifica que el estudiante ha completado
+              satisfactoriamente sus horas sociales.
+            </p>
+
+            <div class="valEstBotones">
+              <button type="button" id="btnCerrarValidacion">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="../js/estudiantes.js"></script>
+    <script src="../js/asistencia_estudiante.js"></script>
+  </body>
+</html>

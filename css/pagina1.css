@@ -1,0 +1,588 @@
+@import url('https://fonts.googleapis.com/css2?family=Iceberg&family=Play:wght@400;700&display=swap');
+/*Normalizacion*/
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family:"play", sans-serif;
+}
+ body{
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+/*Css de landing page*/
+.cabeceraMenu{
+  width: 80%;
+  height: 50px;
+  background: linear-gradient(135deg,#0623ff,#3f3ffe,#2332ff);
+  margin-left:20%;
+  border-radius:0 0 20px 20px ;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+/* Logo de la institución */
+.logoInsal{
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 3px;
+  right: 20px;
+  background: none;
+}
+/* Título de la barra */
+.barraTitulo{
+  font-size: 25px;
+  padding: 10px;
+  color:beige;
+}
+/* Menú de la barra */
+.barraMenu{
+  width: 20%;
+  height: 100%;
+  background:linear-gradient(135deg,#ff5100,#ffb339,#f77714);
+  background-size: 200% 200%;
+  animation: cambiarcolor 2s ease infinite;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+@keyframes cambiarcolor{
+0%{
+  background-position: 0% 50%;
+}
+50%{
+  background-position: 100% 50%;
+}
+100%{
+  background-position: 0% 50%;
+}
+}
+/* Imagen de la barra */
+img{
+display:block;
+width: 200px;
+height: 200px;
+}
+/* Elemento del menú */
+.menuElemento{
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  padding: 25px;
+  font-size: 1.5em;
+  color:#3f3ffe;
+  text-decoration: none;
+  transition: all 0.5s ease;
+}
+/* Efecto hover del menú */
+.menuElemento:hover{
+  border-bottom: 2px solid #ccc5c5;
+  border-left:2px solid #ccc5c5 ;
+  border-radius: 20px;
+  background: #ffffff10;
+  transform: translateY(-5px);
+  color: #d6d5d5;
+}
+.menuElemento.active{
+   border-bottom: 2px solid #ccc5c5;
+  border-left:2px solid #ccc5c5 ;
+  border-radius: 20px;
+  background: #ffffff10;
+  color: #d6d5d5;
+  transform: translateY(-5px);
+}
+i{
+  padding-right:40px;
+}
+
+/* Contenedor de información */
+.contenedorInfo{
+display: grid;
+grid-template-columns: 1fr 1fr;
+margin-left:22%;
+width: 80%;
+margin-top: 70px;
+}
+
+.paginaTextoval{
+  display: grid;
+  place-items: center;
+}
+
+.infoServicio{
+  display: grid;
+  place-items: center;
+}
+
+/* Texto de la página */
+.paginaTexto{
+  width: 90%;
+  height:40vh;
+  border: 2px solid;
+   border-radius: 40px;
+   box-shadow: 0 15px  rgba(0, 0, 0,0.2);
+   margin-bottom: 30px;
+   animation: mostrar 2s 1;
+}
+
+
+/* Efecto hover del texto */
+.paginaTexto:hover{
+    transform: translateY(-5px);
+  transition: 0.5s;
+  cursor: pointer;
+}
+ .paginaTexto h1{
+  background:#3f3ffe;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 25%;
+  border-bottom: 2px solid black;
+border-radius: 38px 38px 0 0;
+}
+
+.paginaTextoval h1{
+  background:#313fff;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  width: 70vh;
+  height: 18vh;
+  border: 2px solid black;
+border-radius:30px;
+box-shadow: 0 15px  rgba(0, 0, 0,0.2);
+animation: mostrar 2s 1;
+transition: transform 0.5s ease;
+}
+/* Efecto hover del texto */
+.paginaTextoval h1:hover{
+    transform: translateY(-5px);
+  cursor: pointer;
+}
+/* Información del servicio */
+.infoServicio p{
+  background:#3f3ffe;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  margin-top: 50px;
+  margin-right:10%;
+  width: 75vh; 
+  height: 18vh;
+  border: 2px solid black;
+border-radius:30px;
+box-shadow: 0 15px  rgba(0, 0, 0,0.2);
+animation: mostrar 2s 1;
+}
+/* Efecto hover de la información del servicio */
+.infoServicio:hover{
+    transform: translateY(-5px);
+  transition: 0.5s;
+  cursor: pointer;
+}
+.paginaTexto p{
+  padding: 15px;
+}
+
+section p{
+  font-weight: 700;
+  line-height: 1.8;
+  text-align:justify;
+}
+
+.contenidoInfo{
+ font-weight: 800;
+}
+.contenidoInfo li{
+  font-size: 1em;
+ padding: 10px;
+ padding-left: 20px;
+ list-style: none;
+}
+.contenidoInfo li::before{
+  content:"✓";
+  padding-right: 10px;
+}
+
+.piePagina{
+  width: 20%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border: 1px solid transparent;
+ background: linear-gradient(135deg,#ff9e02,#ff7d1a);
+ background-size: 200% 200%;
+ animation: cambiarcolor 2s ease infinite;
+ padding-left: 30px;
+ color:beige;
+}
+.imgMision{
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 40px;
+}
+.apartadoBoton{
+    width: 90%;
+    height:35vh;
+  border: 2px solid;
+   border-radius: 40px;
+   box-shadow: 0 15px  rgba(0, 0, 0,0.2);
+   margin-bottom: 30px;
+   margin-top: 150px;
+   margin-left: 50%;
+   animation: mostrar 2s 1;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+/* Título del apartado del botón */
+.apartadoBoton h1{
+  background:#3f3ffe;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 25%;
+  border-bottom: 2px solid black;
+border-radius: 38px 38px 0 0;
+}
+.btnRegistrarse{
+  text-decoration: none;
+  border:2px solid transparent;
+  width: 100%;
+  height: 75%;
+  font-size:2em;
+  padding-bottom: 25px;
+  font-weight:700;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color:black;
+  justify-content: center;
+  border-radius: 0 0 40px 40px;
+}
+.btnRegistrarse i{
+  padding-top: 15px;
+}
+.apartadoBoton:hover{
+  transform:translateY(-5px);
+  transition:0.3s;
+}
+.btnRegistrarse i{
+  padding-right:45px;
+
+}
+/* Título del apartado de consulta */
+.apartadoConsulta h1{
+  background:#3f3ffe;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 25%;
+  border-bottom: 2px solid black;
+border-radius: 38px 38px 0 0;
+}
+@keyframes mostrar {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media screen and (min-width:360px) and (max-width:480px) and (orientation: portrait) {
+  body{
+    width:100%;
+    min-height:100vh;
+    height: auto;
+    margin:0;
+    padding:0;
+    padding-top:60px;
+  }
+  .cabeceraMenu{
+    width:100%;
+    margin: 0;
+    border-radius: 0 0 15px 15px;
+    padding: 2px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
+  .barraMenu {
+    position:fixed;
+    bottom: 0;
+    top:auto;
+    left: 0;
+    right:0;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0;
+   margin:0;
+    z-index: 1000;
+    background: linear-gradient(to right, #fb8728, #ff9d4d);
+    background-size: 200% 200%;
+  }
+  .barraMenu img{
+    display: none;
+  }
+  .menuElemento{
+    width: 75px;
+    height: 70px;
+    font-size: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top:10px;
+    box-sizing: border-box;
+    padding:10px;
+    color: #3f3ffe;
+    transition: all 0.3s ease;
+  }
+  .menuElemento i{
+    padding-right: 3px;
+    font-size: 16px;
+    padding-bottom: 5px;
+  }
+  .menuElemento:hover{
+    transform: translateY(-5px);
+    color: #d6d5d5;
+   border-top: 2px solid #d6d5d5;
+   border-right: 2px solid #d6d5d5;
+  }
+  .contenedorInfo{
+    grid-template-columns: 1fr;
+    margin: 10px auto;
+    margin-bottom: 80px;
+    width: 100%;
+    max-width: 400px;
+    grid-auto-flow: row;
+  }
+  .paginaTextoval{
+    display: grid;
+    place-items: center;
+    margin-bottom:40px;
+    box-shadow: 0 3px rgba(0, 0, 0,0.2);
+  }
+  .paginaTextoval h1{
+    width: 90%;
+  }
+  .infoServicio{
+    display: grid;
+    place-items: center;
+  }
+  .infoServicio p{
+    width: 90%;
+    margin-right: 0;
+    box-shadow: 0 10px rgba(0, 0, 0,0.2);
+    margin-top: 20px;
+    margin-bottom: 25px;
+    padding: 30px;
+  }
+  .apartadoBoton{
+    margin: 125px auto 30px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .paginaTexto{
+    width: 100%;
+    height: auto;
+    min-height: 200px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px rgba(0, 0, 0,0.2);
+  }
+  .paginaTexto h1{
+    font-size: 18px;
+    height: auto;
+    padding: 15px;
+    text-align: justify;
+  }
+  .paginaTexto p{
+    font-size: 14px;
+    padding: 15px;
+    text-align: justify;
+  }
+  section p{
+    font-size: 14px;
+    text-align: center;
+    padding-bottom: 5px;
+    text-align: justify;
+  }
+  .piePagina{
+    display: none;
+  }
+  html, body{
+    overflow-y: auto;
+  }
+
+}
+ 
+/* Adaptación para tablets */
+@media screen and (min-width: 650px) and (max-width: 1024px) {
+  body{
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    padding-top:65px;
+  }
+  .cabeceraMenu{
+    width: 100%;
+    margin: 0;
+    border-radius: 0 0 15px 15px;
+    padding: 2px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
+  .barraMenu {
+    position: fixed;
+    bottom: 0;
+    top: auto;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 0;
+    padding: 0;
+    z-index: 1000;
+    background: linear-gradient(to right, #fb8728, #ff9d4d);
+    background-size: 200% 200%;
+  }
+  .barraMenu img{
+    display: none;
+  }
+  .menuElemento{
+    width: 100px;
+    height: 75px;
+    padding: 10px;
+    font-size: 14px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #3f3ffe;
+    transition: all 0.3s ease;
+  }
+  .menuElemento i{
+    padding-right: 0;
+    font-size: 24px;
+    padding-bottom: 5px;
+  }
+  .menuElemento:hover{
+    transform: translateY(-2px);
+    color: #ccc5c5;
+  }
+  .contenedorInfo{
+    grid-template-columns: 1fr;
+    margin: 18px auto;
+    margin-bottom: 90px;
+    width: 100%;
+    height: auto;
+    max-width: 850px;
+    grid-auto-flow: row;
+  }
+  .paginaTextoval{
+    display: grid;
+    place-items: center;
+  }
+  .paginaTextoval h1{
+    width: 80%;
+    height:200px;
+    font-size: 40px;
+  }
+  .infoServicio{
+    display: grid;
+    margin-bottom: 30px;
+    place-items: center;
+  }
+  .infoServicio p{
+    width: 80%;
+    font-size: 24px;
+    margin-right: 0;
+  }
+  .apartadoBoton{
+    margin: 100px auto;
+    margin-top:30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .paginaTexto{
+    width: 80%;
+    height:auto;
+    min-height:250px;
+    margin-bottom:40px;
+    margin-left:68px;
+  }
+  .paginaTexto h1{
+    font-size: 20px;
+    height: auto;
+    padding: 20px;
+    text-align: justify;
+  }
+  .paginaTexto p{
+    font-size: 24px; 
+    padding: 20px;
+    text-align: justify;
+  }
+  section p{
+    font-size:24px;
+    text-align: justify;
+    padding-bottom: 10px;
+  }
+  .piePagina{
+    display: none;
+  }
+  .btnRegistrarse{
+    font-size: 40px;
+    line-height: 1.5;
+  }
+  .contenidoInfo{
+    gap: 20px;
+    padding: 20px;
+    font-size: 20px;
+  }
+  html, body{
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
+
+
+
+

@@ -1,0 +1,525 @@
+@import url("https://fonts.googleapis.com/css2?family=Iceberg&family=Play:wght@400;700&display=swap");
+
+/*Normalizacion*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "play", sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  background: linear-gradient(to right, #fb8728, #e1e1e1, #2424ff);
+  background-size: 100% 100%;
+}
+.loginContenedor {
+  background-color: beige;
+  border-radius: 35px;
+  box-shadow: 0 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+  width: 800px;
+  max-width: 100%;
+  min-height: 480px;
+  animation: mostrar 2s 1;
+}
+@keyframes mostrar {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.loginContenedor h1 {
+  margin-bottom: 25px;
+}
+.loginContenedor p {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.3px;
+  margin: 20px 0;
+}
+
+.loginContenedor span {
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.loginContenedor button {
+  background-color: #0fb7f9;
+  color: #fff;
+  font-size: 12px;
+  padding: 10px 40px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-top: 10px;
+  cursor: pointer;
+}
+button:hover {
+  transform: scale(1.1);
+  transition: 1s;
+}
+.loginContenedor button.escondido {
+  background-color: transparent;
+  border-color: #fff;
+}
+.loginContenedor .botonGoogle {
+  width: 60%;
+  margin-top: 25px;
+  background: white;
+  border: 2px solid black;
+  color: #000;
+  font-size: 8px;
+  text-align: center;
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+}
+.loginContenedor img {
+  height: 10px;
+  margin-left: 10px;
+  margin-bottom: 3px;
+}
+.loginContenedor form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 40px;
+  height: 100%;
+}
+
+.loginContenedor input {
+  background-color: #eee;
+  border: none;
+  border-bottom: 3px solid #0fb7f9;
+  margin: 8px 0;
+  padding: 10px 15px;
+  font-size: 13px;
+  border-radius: 8px;
+  width: 100%;
+  outline: none;
+  box-shadow: 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.loginContenido {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+  z-index: 2;
+}
+
+.inicio {
+  left: 0;
+  width: 50%;
+  z-index: 2;
+  opacity: 1;
+}
+
+.loginContenedor.active .inicio {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.registrar {
+  left: 0;
+  width: 50%;
+  opacity: 0;
+  z-index: 1;
+}
+
+.loginContenedor.active .registrar {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+  animation: mover 0.6s;
+}
+
+@keyframes mover {
+  0%,
+  50% {
+    opacity: 0;
+    z-index: 1;
+  }
+  50%,
+  100% {
+    opacity: 1;
+    z-index: 5;
+  }
+}
+
+.panelContenedor {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  transition: all 0.6s ease-in-out;
+  z-index: 1000;
+  border-radius: 150px 35px 35px 100px;
+}
+
+.loginContenedor.active .panelContenedor {
+  transform: translateX(-100%);
+  border-radius: 35px 150px 100px 35px;
+}
+
+.loginPanel {
+  background: linear-gradient(to right, #5252f8, #5f5fff);
+  color: #fff;
+  position: relative;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+  transform: translateX(0);
+  transition: all 0.6s ease-in-out;
+}
+
+.loginContenedor.active .loginPanel {
+  transform: translateX(50%);
+}
+
+.panelContenido {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 30px;
+  text-align: center;
+  top: 0;
+  transform: translateX(0);
+  transition: all 0.6s ease-in-out;
+}
+
+.panelIzquierda {
+  transform: translateX(-200%);
+}
+
+.loginContenedor.active .panelIzquierda {
+  transform: translateX(0);
+}
+
+.panelDerecha {
+  right: 0;
+  transform: translateX(0);
+}
+
+.loginContenedor.active .panelDerecha {
+  transform: translateX(200%);
+}
+
+/* Estilos para SweetAlert - asegurar que aparezca encima de todo */
+body.swal2-shown {
+  overflow: hidden !important;
+}
+
+.swal2-container {
+  z-index: 99999 !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.swal2-popup {
+  z-index: 99999 !important;
+  position: fixed !important;
+}
+
+/* Adaptación vertical para celulares */
+@media screen and (min-width: 360px) and (max-width: 480px) and (orientation: portrait) {
+  body {
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+  }
+  .loginContenedor {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    padding: 0;
+    border-radius: 0;
+    background: rgba(222, 221, 221, 0.413);
+    font-size: 15px;
+  }
+  .loginContenedor h1 {
+    font-size: 25px;
+    padding-top: 5px;
+  }
+  .loginContenedor span {
+    font-size: 12px;
+  }
+
+  .loginContenido {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .panelContenedor {
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    border-radius: 100px 100px 0 0;
+    z-index: 4;
+  }
+  .botonGoogle {
+    margin-bottom: 10px;
+  }
+  .panelContenedor p {
+    font-size: 14px;
+  }
+  .registrar {
+    top: 50%;
+    opacity: 0;
+    z-index: 1;
+    transform: translateY(50%);
+  }
+  .inicio {
+    top: 0;
+    opacity: 1;
+    z-index: 3;
+  }
+  .panelContenido {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px 30px;
+    text-align: center;
+    z-index: 1000;
+    transform: translateY(-20px);
+    transition: all 0.6s ease-in-out;
+  }
+  .loginContenedor.active .registrar {
+    transform: translateY(0);
+    opacity: 1;
+    animation: abajo 0.6s;
+  }
+  @keyframes abajo {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+      z-index: 2;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+      z-index: 4;
+    }
+  }
+  .loginContenedor.active .inicio {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  .loginContenedor.active .panelContenedor {
+    transform: translateY(-100%);
+    border-radius: 0 0 100px 100px;
+  }
+  .loginPanel {
+    transform: translateY(0);
+    transition: 0.6s;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+  .loginContenedor.active .loginPanel {
+    transform:translateY(0);
+  }
+  .panelContenido{
+    width: 100%;
+  }
+  .panelIzquierda {
+    transform: translateY(-200%);
+  }
+  .loginContenedor.active .panelIzquierda {
+    transform: translateY(0);
+  }
+
+  .panelDerecha {
+    top: 20px;
+    transform: translateY(0);
+  }
+  .loginContenedor.active .panelDerecha {
+    transform: translateY(200%);
+  }
+
+  button:hover {
+    transform: scale(1.2);
+    transition: 1s;
+  }
+}
+@media screen and (min-width: 650px) and (max-width: 1024px) and (orientation: portrait) {
+  body {
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+  }
+  .loginContenedor {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    gap: 10px;
+    border-radius: 0;
+    background: rgba(222, 221, 221, 0.413);
+    font-size: 15px;
+  }
+  .loginContenedor h1 {
+    font-size: 55px;
+    padding-bottom: 40px;
+  }
+  .loginContenedor span {
+    font-size: 25px;
+  }
+  .loginContenedor input,
+  .loginContenedor button {
+    font-size: 25px;
+    margin-top: 20px;
+  }
+  .loginContenedor .botonGoogle {
+    font-size: 18px;
+    width: 80%;
+  }
+  .botonGoogle img {
+    width: 28px;
+    height: 25px;
+  }
+  .loginContenido {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  .panelContenedor {
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    border-radius: 100px 100px 0 0;
+    z-index: 4;
+  }
+  .panelContenedor p {
+    font-size: 25px;
+  }
+  .registrar {
+    top: 50%;
+    opacity: 0;
+    z-index: 1;
+    transform: translateY(50%);
+  }
+  .inicio {
+    top: 0;
+    opacity: 1;
+    z-index: 3;
+  }
+  .panelContenido {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px 30px;
+    text-align: center;
+    z-index: 1000;
+    transform: translateY(-20px);
+    transition: all 0.6s ease-in-out;
+  }
+  .loginContenedor.active .registrar {
+    transform: translateY(0);
+    opacity: 1;
+    animation: abajo 0.6s;
+  }
+  @keyframes abajo {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+      z-index: 2;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+      z-index: 4;
+    }
+  }
+  .loginContenedor.active .inicio {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  .loginContenedor.active .panelContenedor {
+    transform: translateY(-100%);
+    border-radius: 0 0 100px 100px;
+  }
+ .loginPanel {
+    transform: translateY(0);
+    transition: 0.6s;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+  .loginContenedor.active .loginPanel {
+    transform:translateY(0);
+  }
+  .panelContenido{
+    width: 100%;
+  }
+  .panelIzquierda {
+    transform: translateY(-200%);
+  }
+  .loginContenedor.active .panelIzquierda {
+    transform: translateY(0);
+  }
+
+  .panelDerecha {
+    top: 20px;
+    transform: translateY(0);
+  }
+  .loginContenedor.active .panelDerecha {
+    transform: translateY(200%);
+  }
+  button:hover {
+    transform: scale(1.2);
+    transition: 1s;
+  }
+}

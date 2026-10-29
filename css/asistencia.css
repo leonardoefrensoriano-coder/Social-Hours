@@ -1,0 +1,134 @@
+/* Estilos de Asistencia (profesor y estudiante). Se enlaza en sistema.html y estudiantes.html */
+
+/* Barra de filtros del profesor */
+.asistenciaFiltros {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+.asistenciaFiltros label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-weight: bold;
+  font-size: 0.85rem;
+}
+.asistenciaFiltros input,
+.asistenciaFiltros select {
+  height: 40px;
+  border-radius: 20px;
+  border: 2px solid #000;
+  padding: 0 12px;
+  background: #ffffff;
+  font-family: "Play", sans-serif;
+}
+.principalSistema
+  .asistenciaFiltros
+  button:not(.btnRegistrar):not(.btnVolverAlertas) {
+  flex: none;
+  max-width: none;
+  padding: 0 18px;
+  white-space: nowrap;
+}
+.asistenciaFooter {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 20px;
+}
+.asistenciaFooter .btnRegistrar {
+  margin-top: 0 !important;
+}
+#asistContador {
+  font-weight: bold;
+}
+
+/* Campos de fecha y horario dentro del formulario Registrar Alumno */
+.sistemaRegistro form .campoFormulario {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+}
+.sistemaRegistro form .campoCompleto {
+  grid-column: 1 / -1;
+}
+
+/* Casillas y horas dentro de la tabla */
+.estiloTabla input[type="time"] {
+  height: 34px;
+  max-width: 140px;
+  padding: 0 8px;
+}
+.estiloTabla input[type="time"]:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Vista del estudiante */
+.resumenAsistencia {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.chipAsistencia {
+  background: #ffffff;
+  border: 2px solid #000;
+  border-radius: 20px;
+  padding: 6px 16px;
+  font-family: "Play", sans-serif;
+}
+.tablaHistorial table tbody tr td.asistioSi {
+  color: #0a8a3a;
+  font-weight: bold;
+}
+.tablaHistorial table tbody tr td.asistioNo {
+  color: #c62828;
+  font-weight: bold;
+}
+
+/* Modo oscuro (blancos más suaves, igual que el resto) */
+body.modo-oscuro .asistenciaFiltros input,
+body.modo-oscuro .asistenciaFiltros select,
+body.modo-oscuro .chipAsistencia {
+  background-color: #eceff3;
+}
+
+/* Registros del día */
+.panelDia {
+  margin-top: 25px;
+  width: 100%;
+}
+.panelDiaFiltros {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.panelDiaFiltros label {
+  font-weight: bold;
+}
+.panelDiaFiltros input[type="date"] {
+  height: 38px;
+  padding: 0 12px;
+  border: 2px solid #000;
+  border-radius: 20px;
+  font-family: "Play", sans-serif;
+}
+.panelDiaFiltros button {
+  height: 38px;
+  padding: 0 18px;
+  border: 2px solid #000;
+  border-radius: 20px;
+  background: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}

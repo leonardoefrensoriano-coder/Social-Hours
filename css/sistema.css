@@ -1,0 +1,1954 @@
+@import url("https://fonts.googleapis.com/css2?family=Iceberg&family=Play:wght@400;700&display=swap");
+
+/* Normalización */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Play", sans-serif;
+  overflow-x: hidden;
+  background-color: #f4f6f9;
+}
+
+/* Barra Lateral */
+.barraSistema {
+  width: 250px;
+  height: 100vh;
+  background: linear-gradient(135deg, #ff5100, #ffac27, #ff770e);
+  background-size: 200% 200%;
+  animation: cambiarcolor 2s ease infinite;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes cambiarcolor {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.barraSistema img {
+  display: block;
+  max-height: 25%;
+  width: auto;
+  margin: 10px auto;
+  object-fit: contain;
+}
+
+.barraElemento {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 25px 30px;
+  font-size: 1.5em;
+  color: #211eed;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.barraElemento i {
+  padding-right: 15px;
+  font-size: 1em;
+  text-align: center;
+}
+
+.barraElemento.active {
+  border-bottom: 3px solid #ccc5c5;
+  border-left: 3px solid #ccc5c5;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  color: #d6d5d5;
+}
+.barraElemento:hover {
+  border-bottom: 3px solid #ccc5c5;
+  border-left: 3px solid #ccc5c5;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  color: #d6d5d5;
+  transform: translateY(-3px);
+}
+.barraSistema footer {
+  margin-top: auto;
+  padding: 15px;
+  text-align: center;
+  color: white;
+  font-size: 0.85rem;
+}
+
+/* Cabecera Superior */
+.cabeceraSistema {
+  width: calc(100% - 250px);
+  height: 50px;
+  background: #0623ff;
+  border-radius: 0 0 20px 20px;
+  margin-left: 250px;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 90;
+}
+
+.cabeceraTitulo {
+  color: aliceblue;
+  font-size: 1.5rem;
+  padding-left: 20px;
+}
+
+.cabeceraTitulo i {
+  padding-right: 10px;
+}
+
+/* Grupo derecho de la cabecera */
+.cabeceraAcciones {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.btnModoOscuro {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  border-bottom: 3px solid transparent;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  background: transparent;
+  color: #ffffff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btnModoOscuro:hover {
+  border-bottom-color: #ccc5c5;
+  border-left-color: #ccc5c5;
+  border-right-color: #ccc5c5;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.cabeceraUsuario {
+  position: relative;
+  padding-left: 12px;
+  padding-right: 20px;
+}
+
+/* Botón de perfil */
+.btnPerfil {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 150px;
+  height: 42px;
+  background: transparent;
+  color: #ffffff;
+  border: none;
+  border-bottom: 3px solid transparent;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-radius: 15px;
+  padding: 5px 12px;
+  font-family: "Play", sans-serif;
+  font-size: 1.2em;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btnPerfil:hover,
+.btnPerfil[aria-expanded="true"] {
+  border-bottom-color: #ccc5c5;
+  border-left-color: #ccc5c5;
+  border-right-color: #ccc5c5;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.fotoPerfil {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ffffff;
+}
+
+/* Menú desplegable del perfil */
+.menuDesplegable {
+  display: none;
+  position: absolute;
+  top: 48px;
+  right: 20px;
+  min-width: 150px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  padding: 10px;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 200;
+}
+
+.menuDesplegable.activo {
+  display: flex;
+}
+
+.menuDesplegable .menuCorreo {
+  color: #444;
+  font-size: 0.85rem;
+  padding: 4px 6px 8px;
+  border-bottom: 1px solid #e3e3e3;
+  word-break: break-all;
+}
+
+.menuDesplegable button {
+  background-color: #ff5100;
+  color: #ffffff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 14px;
+  font-family: "Play", sans-serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.menuDesplegable button:hover {
+  background-color: #ffac27;
+}
+
+.menuDesplegable button i {
+  padding-right: 6px;
+}
+
+/* Contenido Principal */
+.principalSistema {
+  margin-left: 250px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(100% - 250px);
+}
+
+/* Grupo de Búsquedas a la par */
+.grupo-busqueda {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 15px;
+  flex-wrap: nowrap;
+}
+
+.principalSistema input {
+  width: auto;
+  flex: 1;
+  max-width: 220px;
+  height: 40px;
+  border-radius: 20px;
+  border: 2px solid #000;
+  padding: 10px;
+  margin-bottom: 0;
+}
+
+.principalSistema button:not(.btnRegistrar):not(.btnVolverAlertas) {
+  width: auto;
+  flex: 1;
+  max-width: 170px;
+  height: 40px;
+  border-radius: 20px;
+  border: 2px solid #000;
+  padding: 10px;
+  margin: 0;
+  cursor: pointer;
+  background-color: #ffffff;
+  font-family: "Play", sans-serif;
+  font-weight: bold;
+}
+
+/* Botón Volver */
+.btnVolverAlertas {
+  background: #ff5100;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 18px;
+  font-family: "Play", sans-serif;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.btnVolverAlertas:hover {
+  background: #ffac27;
+  transform: translateY(-2px);
+}
+
+/* Tablas General */
+.estiloTabla {
+  border: 2px solid black;
+  border-radius: 20px;
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 240px;
+}
+
+.estiloTabla::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.estiloTabla::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.estiloTabla::-webkit-scrollbar-thumb {
+  background: #00b4d8;
+  border-radius: 10px;
+}
+
+.estiloTabla::-webkit-scrollbar-thumb:hover {
+  background: #0096c7;
+}
+
+.estiloTabla table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.estiloTabla table th {
+  background: #ff5100;
+  font-size: 0.9em;
+  padding: 0.8rem 1rem;
+  color: white;
+}
+
+.estiloTabla table th,
+.estiloTabla table td {
+  border: 1px solid black;
+  padding: 0.8rem 1rem;
+  text-align: center;
+}
+
+.estiloTabla table tbody tr {
+  background: white;
+}
+
+.estiloTabla table tbody tr td {
+  color: #333;
+}
+
+.estiloTabla table tbody tr:hover {
+  background: #e0f7fa;
+}
+
+.btnRegistrar {
+  margin-top: 20px;
+  width: 200px;
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+  padding: 10px;
+  background: #0623ff;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.btnRegistrar:hover {
+  transform: scale(1.05);
+}
+
+/* Formulario Registro Alumno */
+.sistemaRegistro {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+  background: #0051ff;
+  padding: 25px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.sistemaRegistro form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  width: 100%;
+}
+
+.sistemaRegistro form input,
+.sistemaRegistro form select {
+  background-color: #e0f7fa;
+  border: none;
+  border-bottom: 3px solid white;
+  padding: 10px 15px;
+  font-size: 13px;
+  font-family: "Play", sans-serif;
+  border-radius: 8px;
+  width: 100%;
+  outline: none;
+  color: #333;
+  cursor: pointer;
+}
+
+.sistemaRegistro form input::placeholder {
+  color: #666;
+}
+
+.sistemaRegistro form select option {
+  background-color: #ffffff;
+  color: #333333;
+}
+
+.sistemaRegistro form button {
+  grid-column: 1 / -1;
+  width: 140px;
+  height: 40px;
+  border-radius: 20px;
+  margin: 10px auto 0 auto;
+  background: linear-gradient(45deg, #00d0ff, #48c1d9, #35d1f0);
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  border: none;
+  transition: transform 0.3s ease;
+}
+
+.sistemaRegistro form button:hover {
+  transform: scale(1.05);
+}
+
+/* Grid General de Tarjetas */
+.grid-tarjetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  width: 90%;
+  max-width: 1100px;
+  margin: 20px auto;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+/* SECCIÓN ALERTAS (Tarjetas al 50% divididas en 2 columnas) */
+#Alertas {
+  margin-left: 250px;
+  width: calc(100% - 250px);
+  padding: 20px;
+}
+
+#Alertas .grid-tarjetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  width: 100%;
+  max-width: 100%;
+  justify-content: center;
+  align-items: stretch;
+}
+
+#Alertas .tarjeta-opcion {
+  flex: 1 1 calc(50% - 25px);
+  width: 100%;
+  max-width: 100%;
+  min-height: 360px;
+  padding: 35px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#Alertas .tarjeta-icono img {
+  max-width: 140px;
+  max-height: 140px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+#Alertas .tarjeta-texto {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Tarjeta Base General */
+.tarjeta-opcion {
+  border: 2px solid #000000;
+  border-radius: 25px;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 15px;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  width: 220px;
+  box-sizing: border-box;
+}
+
+.tarjeta-opcion:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.tarjeta-icono {
+  font-size: 70px;
+  color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  width: 100%;
+}
+
+.tarjeta-icono img {
+  max-width: 95px;
+  max-height: 95px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.tarjeta-texto {
+  width: 100%;
+  text-align: center;
+  border-top: 2px solid #000000;
+  padding-top: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #000000;
+}
+
+/* Sección Proyectos */
+.grid-tarjetas-proyectos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.tarjeta-proyecto {
+  border: 2px solid #000000;
+  border-radius: 20px;
+  background-color: #ffffff;
+  padding: 15px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.titulo-proyecto {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #0b1b60;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.tabla-mini-contenedor {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.tabla-mini {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.tabla-mini th,
+.tabla-mini td {
+  border: 1px solid #777777;
+  padding: 4px 2px;
+  text-align: center;
+}
+
+.tabla-mini th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+  color: #333333;
+}
+
+/* Modal Grado */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+}
+
+.modal-contenido {
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 380px;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cerrar-modal {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#formularioGrado {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+#formularioGrado input,
+#formularioGrado select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.btn-guardar {
+  background-color: #e65c00;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Control de Visibilidad y Animación */
+.oculto {
+  display: none !important;
+}
+
+.vista {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Estilos de Estado (Verde / Rojo) */
+.estado-completo {
+  color: #2e7d32 !important;
+  font-weight: bold;
+}
+
+.estado-incompleto {
+  color: #c62828 !important;
+  font-weight: bold;
+}
+
+/* ==========================================================================
+   MODO OSCURO
+   El azul y el naranja se oscurecen; el blanco se mantiene, pero más suave.
+   Se activa con la clase "modo-oscuro" en el <body>
+   ========================================================================== */
+body.modo-oscuro {
+  background-color: #1a1a1abf;
+}
+
+/* Azul y naranja más oscuros */
+body.modo-oscuro .barraSistema {
+  background: linear-gradient(135deg, #704a0c, #da9525, #b85407);
+  background-size: 200% 200%;
+  animation: moverFondo 5s ease infinite;
+}
+body.modo-oscuro .barraElemento {
+  color: #ffffff;
+}
+body.modo-oscuro .barraElemento:hover {
+  color: #ffffff;
+}
+body.modo-oscuro .cabeceraSistema {
+  background: #0b0b69;
+}
+body.modo-oscuro .menuDesplegable button,
+body.modo-oscuro .btnVolverAlertas,
+body.modo-oscuro .estiloTabla table th {
+  background: #0b0b69;
+  color: #ffffff;
+}
+body.modo-oscuro .menuDesplegable button:hover,
+body.modo-oscuro .btnVolverAlertas:hover {
+  background: #5a5a7a;
+}
+body.modo-oscuro .btnRegistrar {
+  background: #3a3a5a;
+  color: #ffffff;
+}
+body.modo-oscuro .btnRegistrar[style*="ff9900"] {
+  background-color: #cc7a00 !important;
+}
+body.modo-oscuro .sistemaRegistro {
+  background: #2a2a3a;
+}
+body.modo-oscuro .btn-guardar {
+  background-color: #4a4a6a;
+  color: #ffffff;
+}
+body.modo-oscuro .titulo-proyecto {
+  color: #e0e0e0;
+}
+
+/* Blancos más suaves */
+body.modo-oscuro .menuDesplegable,
+body.modo-oscuro .principalSistema input,
+body.modo-oscuro
+  .principalSistema
+  button:not(.btnRegistrar):not(.btnVolverAlertas),
+body.modo-oscuro .tarjeta-opcion,
+body.modo-oscuro .tarjeta-proyecto,
+body.modo-oscuro .modal-contenido {
+  background-color: #e0e0e0;
+  color: #1a1a1a;
+}
+body.modo-oscuro .estiloTabla table tbody tr {
+  background: #e0e0e0;
+  color: #ffffff;
+}
+body.modo-oscuro .estiloTabla table tbody tr:hover {
+  background: #d0d0d0;
+}
+body.modo-oscuro .sistemaRegistro form input,
+body.modo-oscuro .sistemaRegistro form select {
+  background-color: #e0e0e0;
+  border-bottom-color: #c0c0c0;
+  color: #ffffff;
+}
+body.modo-oscuro .sistemaRegistro form select option {
+  background-color: #e0e0e0;
+  color: #ffffff;
+}
+body.modo-oscuro .tabla-mini th {
+  background-color: #c0c0c0;
+  color: #ffffff;
+}
+body.modo-oscuro #formularioGrado input,
+body.modo-oscuro #formularioGrado select {
+  background-color: #e0e0e0;
+  color: #ffffff;
+}
+body.modo-oscuro .estiloTabla::-webkit-scrollbar-track {
+  background: #3a3a3a;
+}
+
+body.modo-oscuro .barraElemento:hover {
+  border-bottom: 3px solid #05058b;
+  border-left: 3px solid #05058b;
+  background: rgba(3, 6, 40, 0.3);
+  border-radius: 20px;
+  color: #05058b;
+  transform: translateY(-3px);
+}
+body.modo-oscuro.barraElemento.active {
+  border-bottom: 3px solid #05058b;
+  border-left: 3px solid #05058b;
+  background: rgba(3, 6, 40, 0.3);
+  border-radius: 20px;
+  color: #05058b;
+  transform: translateY(-3px);
+}
+@keyframes moverFondo {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+body.modo-oscuro .tarjeta-grado,
+body.modo-oscuro .tarjeta-proyecto,
+body.modo-oscuro .tarjeta-alumno,
+body.modo-oscuro .tarjeta-alerta {
+  background-color: #2a2a3a73;
+  color: #ffffff;
+  border: 1px solid #4a4a6a;
+}
+/* Casillas de las tablas de Alertas (no heredan el estilo de los inputs de texto) */
+.principalSistema input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  max-width: none;
+  padding: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  accent-color: #00b4d8;
+  vertical-align: middle;
+}
+
+/* Botones Cambiar / Eliminar en la tabla de Alumnos */
+.principalSistema .estiloTabla td.celdaAcciones {
+  white-space: nowrap;
+}
+.principalSistema .estiloTabla button.btnFila {
+  width: auto;
+  flex: none;
+  max-width: none;
+  height: 30px;
+  padding: 0 12px;
+  margin: 2px;
+  border: none;
+  border-radius: 15px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.principalSistema .estiloTabla button.btnFilaAcciones {
+  background-color: #0623ff;
+}
+.principalSistema .estiloTabla button.btnFila:hover {
+  filter: brightness(1.15);
+}
+body.modo-oscuro .principalSistema .estiloTabla button.btnFilaAcciones {
+  background-color: #0419b3;
+}
+
+/* Estilos inline movidos del HTML */
+#fotoPerfil {
+  display: none;
+}
+
+#btnFormularioLatas {
+  background-color: #ff9900;
+  margin-left: 10px;
+}
+
+#btnRegistrosDia {
+  margin-left: 10px;
+}
+
+#estado {
+  cursor: default;
+}
+
+#registroLatas {
+  display: none;
+}
+
+#horasCalculadas {
+  background-color: #e9ecef;
+  cursor: not-allowed;
+}
+
+#registroDia {
+  display: none;
+}
+
+#btnAnadirGrado,
+.tarjeta-grado,
+#btnHorasCompletas,
+#btnHorasIncompletas {
+  cursor: pointer;
+}
+
+#vistaDetalleGrado,
+#vistaHorasCompletas,
+#vistaHorasIncompletas {
+  display: none;
+}
+
+#btnVolverGrados,
+.btnVolverAlertas {
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+#vistaDetalleGrado .estiloTabla,
+#vistaHorasCompletas .estiloTabla,
+#vistaHorasIncompletas .estiloTabla {
+  margin-top: 15px;
+}
+
+#btnEnviarAlertaCompletados,
+#btnEnviarAlertaIncompletos {
+  margin-top: 20px;
+}
+.tarjetaVal {
+  width: 80%;
+  height: 80%;
+  border: 2px solid black;
+  margin-top: 10%;
+  margin-left: 38%;
+  width: 500px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+}
+.tarjetaVal h1 {
+  font-size: 24px;
+  padding-top: 20px;
+}
+.tarjetaVal button {
+  width: 100%;
+  height: 50px;
+  margin-top: 125px;
+  background-color: #0623ff;
+  color: #fff;
+  border: 2px solid black;
+  border-radius: 0 0 50px 50px;
+  padding: 15px 30px;
+  cursor: pointer;
+}
+.modalContenido {
+  width: 50%;
+  height: 60%;
+  margin-left: 30%;
+  margin-top: 5%;
+  background: #fff;
+  border-radius: 50px;
+  padding: 20px;
+  animation: mostrar 0.5s ease-in-out;
+}
+@keyframes mostrar {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.modalContenido button {
+  width: 100px;
+  height: 50px;
+  margin-top: 180px;
+  margin-left: 60%;
+  background-color: #0623ff;
+  color: #fff;
+  border: 2px solid black;
+  border-radius: 50px;
+  padding: 15px;
+  cursor: pointer;
+}
+.botonesValidacion button {
+  margin-top: 85px;
+  margin-left: 25%;
+  width: 100px;
+  height: 50px;
+  background-color: #0623ff;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 15px;
+  cursor: pointer;
+}
+.botonesValidacion button:hover {
+  transition: 0.5s ease-in;
+  transform: scale(1.1);
+}
+.btn-guardar {
+  color: #000;
+}
+.asistenciaManual {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#formAsistenciaManual input::placeholder,
+.asistenciaManual input::placeholder {
+  color: #666;
+  opacity: 1;
+}
+
+#formAsistenciaManual
+  input[type="date"]:invalid:not(:focus)::-webkit-datetime-edit,
+#formAsistenciaManual
+  input[type="time"]:invalid:not(:focus)::-webkit-datetime-edit {
+  display: none;
+}
+
+.asistenciaManual input[type="date"]:invalid:not(:focus)::-webkit-datetime-edit,
+.asistenciaManual
+  input[type="time"]:invalid:not(:focus)::-webkit-datetime-edit {
+  display: none;
+}
+
+#formAsistenciaManual input[type="date"]:invalid:not(:focus)::before,
+#formAsistenciaManual input[type="time"]:invalid:not(:focus)::before {
+  content: attr(placeholder);
+  color: #666;
+}
+
+.asistenciaManual input[type="date"]:invalid:not(:focus)::before,
+.asistenciaManual input[type="time"]:invalid:not(:focus)::before {
+  content: attr(placeholder);
+  color: #666;
+}
+
+@media screen and (min-width: 360px) and (max-width: 480px) and (orientation: portrait) {
+  body {
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    padding-top: 60px;
+    padding-bottom: 80px;
+  }
+  .cabeceraSistema {
+    width: 100%;
+    margin: 0;
+    border-radius: 0 0 15px 15px;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  .cabeceraTitulo {
+    font-size: 1.1rem;
+    padding-left: 12px;
+  }
+  .cabeceraUsuario {
+    padding-left: 5px;
+    padding-right: 10px;
+  }
+  .btnModoOscuro {
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
+  }
+  .btnPerfil {
+    min-width: 0;
+    font-size: 1em;
+    padding: 5px 8px;
+  }
+  .menuDesplegable {
+    right: 10px;
+    min-width: 180px;
+  }
+  .menuDesplegable button {
+    height: 44px;
+    font-size: 1rem;
+  }
+  .barraSistema {
+    position: fixed;
+    bottom: 0;
+    top: auto;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 70px;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+  }
+  .barraSistema img {
+    display: none;
+  }
+  .barraSistema footer {
+    display: none;
+  }
+  .barraElemento {
+    flex: 1;
+    height: 70px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 10px;
+    padding: 5px 2px;
+    margin: 0;
+    border: 3px solid transparent;
+    border-radius: 20px;
+  }
+  .barraElemento i {
+    padding-right: 0;
+    padding-bottom: 5px;
+    font-size: 20px;
+  }
+  .barraElemento:hover {
+    transform: none;
+  }
+  body.modo-oscuro .barraElemento:hover {
+    transform: none;
+  }
+  .principalSistema {
+    margin-left: 0;
+    width: 100%;
+    padding: 12px;
+  }
+  #Alertas {
+    margin-left: 0;
+    width: 100%;
+    padding: 12px;
+  }
+  .grupo-busqueda {
+    padding: 10px;
+    gap: 10px;
+  }
+  .principalSistema .grupo-busqueda input {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr 1fr);
+    max-width: 200px;
+    height: 50px;
+    font-size: 12px;
+  }
+  .principalSistema
+    .grupo-busqueda
+    button:not(.btnRegistrar):not(.btnVolverAlertas) {
+    display: grid;
+    grid-template-columns: 1fr;
+    max-width: 150px;
+    height: 50px;
+    padding: 12px;
+    font-size: 15px;
+  }
+  .btnRegistrar {
+    width: 100%;
+    max-width: 250px;
+    height: 50px;
+    font-size: 10px;
+  }
+  #btnFormularioLatas,
+  #btnRegistrosDia {
+    margin-left: 0;
+  }
+  .btnVolverAlertas,
+  #btnVolverGrados {
+    min-height: 44px;
+    padding: 0 20px;
+    font-size: 1rem;
+  }
+  #btnEnviarAlertaCompletados,
+  #btnEnviarAlertaIncompletos {
+    width: 100%;
+    max-width: 200px;
+    height: 50px;
+    font-size: 15px;
+  }
+  .estiloTabla {
+    width: 100%;
+    max-height: 300px;
+  }
+  .estiloTabla table {
+    min-width: 550px;
+  }
+  .estiloTabla table th,
+  .estiloTabla table td {
+    padding: 8px;
+    font-size: 10px;
+  }
+  .principalSistema .estiloTabla button.btnFila {
+    height: 50px;
+    font-size: 10px;
+  }
+  .sistemaRegistro {
+    width: 100%;
+    max-width: none;
+    margin: 15px auto;
+    padding: 18px 15px;
+    border-radius: 15px;
+  }
+  .sistemaRegistro form,
+  #registroLatas form,
+  #registroDia form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 10px;
+  }
+  .sistemaRegistro form input,
+  .sistemaRegistro form select {
+    width: 100%;
+    min-width: 0;
+    min-height: 45px;
+    padding: 10px 8px;
+    font-size: 10px;
+  }
+  .sistemaRegistro form input[type="email"],
+  .sistemaRegistro form input[type="password"] {
+    grid-column: 1 / -1;
+  }
+  .sistemaRegistro form button {
+    width: 100%;
+    max-width: 240px;
+    height: 46px;
+    font-size: 15px;
+  }
+  .modal-contenido {
+    padding: 20px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .cerrar-modal {
+    top: 6px;
+    right: 14px;
+    font-size: 32px;
+  }
+  #formularioGrado {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 10px;
+  }
+  #formularioGrado input,
+  #formularioGrado select {
+    min-width: 0;
+    min-height: 45px;
+    padding: 10px 8px;
+    font-size: 15px;
+  }
+  #formularioGrado .btn-guardar {
+    grid-column: 1 / -1;
+  }
+  .btn-guardar {
+    width: 100%;
+    height: 50px;
+    font-size: 15px;
+  }
+  .grid-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    width: 100%;
+    max-width: none;
+    margin: 15px auto;
+  }
+  .tarjeta-opcion {
+    width: 100%;
+    min-height: 180px;
+    padding: 15px 10px;
+  }
+  .tarjeta-icono {
+    font-size: 50px;
+  }
+  .tarjeta-icono img {
+    max-width: 85px;
+    max-height: 85px;
+  }
+  .tarjeta-texto {
+    font-size: 15px;
+  }
+  body :has(> .tarjeta-grado) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    width: 100%;
+    max-width: none;
+  }
+  .tarjeta-grado {
+    width: 100%;
+    min-height: 160px;
+    padding: 10px 6px;
+    border-radius: 15px;
+  }
+  #Alertas .grid-tarjetas {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  #Alertas .tarjeta-opcion {
+    min-height: 240px;
+    padding: 20px 15px;
+  }
+  #Alertas .tarjeta-icono img {
+    max-width: 100px;
+    max-height: 100px;
+  }
+  #Alertas .tarjeta-texto {
+    font-size: 15px;
+  }
+  .grid-tarjetas-proyectos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    width: 100%;
+    max-width: none;
+  }
+  .tarjeta-proyecto {
+    padding: 10px 6px;
+    border-radius: 15px;
+  }
+  .titulo-proyecto {
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+  .tabla-mini {
+    font-size: 15px;
+  }
+  .tarjetaVal {
+    width: 90%;
+    max-width: 500px;
+    height: auto;
+    min-height: 200px;
+    margin: 15% auto 0 auto;
+    justify-content: flex-start;
+    overflow: hidden;
+    border-radius: 30px;
+  }
+  .tarjetaVal h1 {
+    margin: auto 0;
+    font-size: 15px;
+    padding: 20px 15px;
+    text-align: center;
+  }
+  .tarjetaVal button {
+    margin-top: 0;
+    width: 100%;
+    height: 55px;
+    padding: 0 15px;
+    font-size: 20px;
+    flex-shrink: 0;
+    border-radius: 0 0 30px 30px;
+  }
+  .modalContenido {
+    width: 90%;
+    max-width: 600px;
+    height: auto;
+    min-height: 40%;
+    margin: 15% auto;
+    border-radius: 30px;
+  }
+  .modalContenido button {
+    display: flex;
+    justify-content: flex-end;
+    width: 120px;
+    margin: 30px 0 0 auto;
+  }
+  .botonesValidacion {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .botonesValidacion button {
+    width: 120px;
+    margin: 30px 0 0 0;
+  }
+  html,
+  body {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
+.asistenciaManual {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media screen and (min-width: 760px) and (max-width: 1024px) and (orientation: portrait) {
+  body {
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    padding-top: 65px;
+    padding-bottom: 90px;
+  }
+  .cabeceraSistema {
+    width: 100%;
+    margin: 0;
+    border-radius: 0 0 15px 15px;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  .cabeceraTitulo {
+    font-size: 1.4rem;
+    padding-left: 20px;
+  }
+  .btnModoOscuro {
+    width: 48px;
+    height: 48px;
+    font-size: 1.3rem;
+  }
+  .btnPerfil {
+    min-width: 0;
+    height: 46px;
+  }
+  .menuDesplegable {
+    min-width: 200px;
+  }
+  .menuDesplegable button {
+    height: 46px;
+    font-size: 1rem;
+  }
+  .barraSistema {
+    position: fixed;
+    bottom: 0;
+    top: auto;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 80px;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+  }
+  .barraSistema img {
+    display: none;
+  }
+  .barraSistema footer {
+    display: none;
+  }
+  .barraElemento {
+    flex: 1;
+    height: 80px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 14px;
+    padding: 5px 2px;
+    margin: 0;
+    border: 3px solid transparent;
+    border-radius: 20px;
+  }
+  .barraElemento i {
+    padding-right: 0;
+    padding-bottom: 5px;
+    font-size: 26px;
+  }
+  .barraElemento:hover {
+    transform: none;
+  }
+  body.modo-oscuro .barraElemento:hover {
+    transform: none;
+  }
+  .principalSistema {
+    margin-left: 0;
+    width: 100%;
+    padding: 25px;
+  }
+  #Alertas {
+    margin-left: 0;
+    width: 100%;
+    padding: 25px;
+  }
+  .grupo-busqueda {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .principalSistema .grupo-busqueda input {
+    flex: 1 1 220px;
+    max-width: 300px;
+    height: 46px;
+    font-size: 16px;
+  }
+  .principalSistema
+    .grupo-busqueda
+    button:not(.btnRegistrar):not(.btnVolverAlertas) {
+    flex: 0 1 170px;
+    max-width: 170px;
+    height: 46px;
+    font-size: 16px;
+  }
+  .btnRegistrar {
+    width: 240px;
+    height: 100px;
+    font-size: 10px;
+  }
+  #btnFormularioLatas,
+  #btnRegistrosDia {
+    margin-left: 0;
+  }
+  .btnVolverAlertas,
+  #btnVolverGrados {
+    min-height: 48px;
+    padding: 0 24px;
+    font-size: 1.05rem;
+  }
+  #btnEnviarAlertaCompletados,
+  #btnEnviarAlertaIncompletos {
+    width: 260px;
+    max-width: none;
+    height: 50px;
+    font-size: 17px;
+  }
+  .estiloTabla {
+    width: 100%;
+    max-height: 380px;
+  }
+  .estiloTabla table th,
+  .estiloTabla table td {
+    padding: 10px;
+    font-size: 15px;
+  }
+  .principalSistema .estiloTabla button.btnFila {
+    height: 40px;
+    font-size: 14px;
+  }
+  .sistemaRegistro {
+    width: 85%;
+    max-width: 700px;
+    margin: 25px auto;
+    padding: 30px;
+  }
+  .sistemaRegistro form,
+  #registroLatas form,
+  #registroDia form {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px 15px;
+  }
+  .sistemaRegistro form input,
+  .sistemaRegistro form select {
+    width: 100%;
+    min-width: 0;
+    min-height: 48px;
+    padding: 10px 12px;
+    font-size: 16px;
+  }
+  .sistemaRegistro form input[type="email"],
+  .sistemaRegistro form input[type="password"] {
+    grid-column: 1 / -1;
+  }
+  .sistemaRegistro form button {
+    width: 200px;
+    height: 48px;
+    font-size: 10px;
+  }
+  .modal-contenido {
+    max-width: 480px;
+    padding: 30px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .cerrar-modal {
+    top: 10px;
+    right: 18px;
+    font-size: 34px;
+  }
+  #formularioGrado {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 14px;
+  }
+  #formularioGrado input,
+  #formularioGrado select {
+    min-width: 0;
+    min-height: 48px;
+    padding: 10px 12px;
+    font-size: 16px;
+  }
+  #formularioGrado .btn-guardar {
+    grid-column: 1 / -1;
+  }
+  .btn-guardar {
+    width: 100%;
+    height: 48px;
+    font-size: 10px;
+  }
+  .grid-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, auto);
+    gap: 30px;
+    width: 100%;
+    max-width: none;
+    margin: 20px auto;
+  }
+  .tarjeta-opcion {
+    width: 100%;
+    min-height: 300px;
+    padding: 30px 20px;
+  }
+  .tarjeta-icono {
+    font-size: 90px;
+  }
+  .tarjeta-icono img {
+    max-width: 130px;
+    max-height: 130px;
+  }
+  .tarjeta-texto {
+    font-size: 1.6rem;
+    padding-top: 15px;
+  }
+  body :has(> .tarjeta-grado) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, auto);
+    gap: 25px;
+    width: 100%;
+    max-width: none;
+  }
+  .tarjeta-grado {
+    width: 100%;
+    min-height: 300px;
+    padding: 30px 20px;
+  }
+  #Alertas .grid-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px;
+  }
+  #Alertas .tarjeta-opcion {
+    min-height: 320px;
+    padding: 30px 20px;
+  }
+  #Alertas .tarjeta-icono img {
+    max-width: 130px;
+    max-height: 130px;
+  }
+  #Alertas .tarjeta-texto {
+    font-size: 1.4rem;
+  }
+  .grid-tarjetas-proyectos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px;
+    width: 100%;
+    max-width: none;
+  }
+  .tarjeta-proyecto {
+    padding: 20px 15px;
+  }
+  .titulo-proyecto {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+  .tabla-mini {
+    font-size: 13px;
+  }
+  .tabla-mini th,
+  .tabla-mini td {
+    padding: 6px 4px;
+  }
+  .tarjetaVal {
+    width: 70%;
+    max-width: 600px;
+    height: auto;
+    min-height: 240px;
+    margin: 10% auto 0 auto;
+    justify-content: flex-start;
+    overflow: hidden;
+  }
+  .tarjetaVal h1 {
+    margin: auto 0;
+    font-size: 28px;
+    padding: 25px 20px;
+    text-align: center;
+  }
+  .tarjetaVal button {
+    margin-top: 0;
+    width: 100%;
+    height: 60px;
+    padding: 0 20px;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .modalContenido {
+    width: 80%;
+    max-width: 650px;
+    height: auto;
+    min-height: 40%;
+    margin: 10% auto;
+  }
+  .modalContenido button {
+    display: block;
+    width: 140px;
+    margin: 30px 0 0 auto;
+  }
+  .botonesValidacion {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .botonesValidacion button {
+    width: 140px;
+    margin: 30px 0 0 0;
+  }
+  html,
+  body {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
+
+@media (hover: none) {
+  .tarjeta-opcion:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+/* Validaciones: selector de estudiante */
+#selectValidacion {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #000;
+  border-radius: 8px;
+}
+#mensajeValidacion {
+  color: #c0392b;
+  font-weight: bold;
+}
+
+/* ==========================================================================
+   FORMULARIOS EMERGENTES: en teléfonos y tablets, Registrar Alumno, Registrar
+   Latas y Tomar Asistencia se abren como ventana emergente. En computadora se
+   quedan como siempre.
+   ========================================================================== */
+.sistemaRegistro form .cerrarFormularioEmergente {
+  display: none;
+}
+
+@media (max-width: 1024px), (hover: none) and (pointer: coarse) {
+  /* Fondo oscuro que cubre toda la pantalla (la apertura/cierre la maneja el JS) */
+  .sistemaRegistro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.55);
+    border-radius: 0;
+    box-shadow: none;
+    align-items: flex-start;
+    justify-content: center;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  /* La ventana emergente en sí */
+  .sistemaRegistro form {
+    position: relative;
+    margin: auto;
+    width: 100%;
+    max-width: 520px;
+    padding: 44px 20px 24px;
+    background: #0051ff;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 14px 12px;
+  }
+  .sistemaRegistro form input,
+  .sistemaRegistro form select {
+    max-width: none;
+    min-height: 46px;
+    font-size: 16px; /* evita el zoom automático al escribir en iPhone/iPad */
+  }
+  .sistemaRegistro form button[type="submit"] {
+    width: 100%;
+    max-width: 260px;
+    height: 48px;
+    font-size: 15px;
+  }
+
+  /* Título de cada ventana */
+  #registro form::before,
+  #formularioAsistenciaManual form::before {
+    grid-column: 1 / -1;
+    color: #ffffff;
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-align: center;
+  }
+  #registro form::before {
+    content: "Registrar Alumno";
+  }
+  #formularioAsistenciaManual form::before {
+    content: "Tomar Asistencia";
+  }
+  #registroLatas form h3 {
+    grid-column: 1 / -1;
+    color: #ffffff;
+    font-size: 1.25rem;
+    text-align: center;
+  }
+
+  /* Botón X para cerrar */
+  .principalSistema .sistemaRegistro form .cerrarFormularioEmergente {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    grid-column: auto;
+    flex: none;
+    width: 38px;
+    height: 38px;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.92);
+    color: #0051ff;
+    font-size: 28px;
+    line-height: 1;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  /* Modo oscuro */
+  body.modo-oscuro .sistemaRegistro {
+    background: rgba(0, 0, 0, 0.65);
+  }
+  body.modo-oscuro .sistemaRegistro form {
+    background: #2a2a3a;
+  }
+}
+
+/* ==========================================================================
+   VENTANA DE VALIDACIÓN (sistema.html): documento centrado y ordenado
+   ========================================================================== */
+#tarjetaValidacion {
+  align-items: center;
+  justify-content: center;
+}
+.valDoc {
+  background: #ffffff;
+  color: #222222;
+  width: 100%;
+  max-width: 640px;
+  max-height: 92vh;
+  overflow-y: auto;
+  border-radius: 30px;
+  padding: 25px 30px;
+  animation: mostrar 0.4s ease-in-out;
+}
+.valDoc > h2,
+.valDoc > p {
+  text-align: center;
+}
+.valDoc > p {
+  margin-top: 4px;
+}
+.valDoc label {
+  display: block;
+  margin-top: 18px;
+}
+.valDoc h1 {
+  color: #0623ff;
+  text-align: center;
+  font-size: 1.5em;
+  margin: 20px 0 10px;
+}
+.valInfo p {
+  margin: 12px 0;
+}
+.valCampo {
+  border-bottom: 2px solid #000000;
+  display: inline-block;
+  min-width: 160px;
+  padding: 0 10px;
+}
+.valFirma {
+  margin-top: 40px;
+  text-align: center;
+}
+.valFirma p {
+  margin: 4px 0;
+}
+.valNota {
+  margin-top: 25px;
+  border-top: 2px solid #000000;
+  padding-top: 15px;
+}
+.valBotones {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 25px;
+}
+.valBotones button {
+  min-width: 130px;
+  height: 46px;
+  background: #0623ff;
+  color: #ffffff;
+  border: none;
+  border-radius: 50px;
+  padding: 0 20px;
+  font-family: inherit;
+  cursor: pointer;
+}
+.valBotones button:hover {
+  transform: scale(1.08);
+  transition: 0.3s ease;
+}
+.valBotones button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+body.modo-oscuro .valDoc {
+  background: #eceff3;
+}
+body.modo-oscuro .valDoc h1 {
+  color: #031294;
+}
+body.modo-oscuro .valBotones button {
+  background: #031294;
+}
+@media (max-width: 600px) {
+  .valDoc {
+    padding: 20px 18px;
+  }
+  .valCampo {
+    min-width: 100px;
+  }
+}

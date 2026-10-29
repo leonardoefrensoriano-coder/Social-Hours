@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="../css/login.css" />
+    
+    <!-- Librería SweetAlert2 para alertas personalizadas -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- API de Google para Inicio de sesión -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+  </head>
+  <body>
+    <div class="loginContenedor" id="loginContenedor">
+      <div class="loginContenido registrar">
+        <form id="formRegistro" autocomplete="new-email">
+          <h1>Crear Cuenta</h1>
+          <span>Crea una cuenta usando tu correo </span>
+          <input
+            type="text"
+            id="regCorreo"
+            placeholder="Correo"
+            autocomplete="new-email"
+            readonly
+            onfocus="this.removeAttribute('readonly')"
+            required
+          />
+          <input
+            type="password"
+            id="regContrasena"
+            placeholder="Contraseña"
+            autocomplete="new-password"
+            readonly
+            onfocus="this.removeAttribute('readonly')"
+            required
+          />
+          <button type="submit">Crear cuenta</button>
+          <button type="button" class="botonGoogle btnGoogleTrigger">
+            Registrar con google <img src="../img/google.png" alt="Google" />
+          </button>
+        </form>
+      </div> 
+
+      <div class="loginContenido inicio">
+        <!-- autenticación -->
+        <form id="formLogin" autocomplete="new-email">
+          <h1>Iniciar Sesion</h1>
+          <span>Usa tu correo para iniciar sesion</span>
+
+          <!-- datos para la API -->
+          <input
+            type="text"
+            id="loginCorreo"
+            placeholder="Correo"
+            autocomplete="new-email"
+            readonly
+            onfocus="this.removeAttribute('readonly')"
+            required
+          />
+          <input
+            type="password"
+            id="loginContrasena"
+            placeholder="Contraseña"
+            autocomplete="new-password"
+            readonly
+            onfocus="this.removeAttribute('readonly')"
+            required
+          />
+
+          <!-- credenciales hacia la API -->
+          <button type="submit">Iniciar Sesion</button>
+
+          <!-- autenticación Google API -->
+          <button type="button" class="botonGoogle btnGoogleTrigger">
+            Iniciar con google <img src="../img/google.png" alt="Google" />
+          </button>
+        </form>
+      </div>
+
+      <div class="panelContenedor">
+        <div class="loginPanel">
+          <div class="panelContenido panelIzquierda">
+            <h1>Hola, Amigo</h1>
+            <p>Inicia Sesion para saber mas de nosotros</p>
+            <button class="escondido" id="iniciarSesion">Iniciar Sesion</button>
+          </div>
+          <div class="panelContenido panelDerecha">
+            <h1>Bienvenido a Social Hours</h1>
+            <p>Entra aqui para conocer mas del sitio</p>
+            <button class="escondido" id="crearCuenta">Crear Cuenta</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Verificar que SweetAlert esté cargado -->
+    <script>
+      console.log("SweetAlert cargado:", typeof Swal !== 'undefined');
+    </script>
+
+    <!-- Enlace con la lógica JavaScript que dispara hacia la API -->
+    <script src="../js/login.js"></script>
+  </body>
+</html>

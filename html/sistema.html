@@ -1,0 +1,700 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema de Horas Sociales</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- SweetAlert2 para alertas estilizadas -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="../css/sistema.css" />
+    <link rel="stylesheet" href="../css/asistencia.css" />
+  </head>
+  <body>
+    <header class="cabeceraSistema">
+      <h1 class="cabeceraTitulo"><i class="fas fa-clock"></i>Social Hours</h1>
+      <!-- Grupo de la derecha: modo oscuro + perfil -->
+      <div class="cabeceraAcciones">
+        <!-- Botón para activar / desactivar el modo oscuro -->
+        <button
+          type="button"
+          id="btnModoOscuro"
+          class="btnModoOscuro"
+          title="Modo oscuro"
+          aria-label="Activar modo oscuro"
+          aria-pressed="false"
+        >
+          <i class="fas fa-moon" id="iconoModo"></i>
+        </button>
+
+        <div class="cabeceraUsuario">
+          <!-- Perfil: al hacer clic muestra la opción de cerrar sesión -->
+          <button
+            type="button"
+            id="btnPerfil"
+            class="btnPerfil"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <img
+              id="fotoPerfil"
+              class="fotoPerfil"
+              alt=""
+              referrerpolicy="no-referrer"
+              style="display: none"
+            />
+            <i class="fas fa-user" id="iconoPerfil"></i> Perfil
+          </button>
+
+          <div id="menuDesplegable" class="menuDesplegable">
+            <button type="button" id="btnCerrarSesion">
+              <i class="fas fa-sign-out-alt"></i>Cerrar Sesión
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <nav class="barraSistema">
+      <img src="../img/img.png" alt="Logo" />
+
+      <!-- Navegación lateral -->
+         <a href="#" data-target="Asistencia" class="barraElemento"
+        ><i class="fa-solid fa-calendar-check"></i>Asistencia</a
+      >
+      <a href="#" data-target="Alumnos" class="barraElemento"
+        ><i class="fa-solid fa-user-graduate"></i>Alumnos</a
+      >
+      <a href="#" data-target="Grados" class="barraElemento"
+        ><i class="fas fa-school"></i>Grados</a
+      >
+      <a href="#" data-target="Alertas" class="barraElemento"
+        ><i class="fa-solid fa-triangle-exclamation"></i>Alertas</a
+      >
+      <a href="#" data-target="Proyectos" class="barraElemento"
+        ><i class="fa-solid fa-globe"></i>Proyectos</a
+      >
+      <a href="#" data-target="Validaciones" class="barraElemento"
+        ><i class="fa-solid fa-check"></i>Validaciones</a
+      >
+      <footer>Todos los derechos reservados©</footer>
+    </nav>
+
+    <main>
+      <section id="Alumnos" class="principalSistema">
+        <div class="grupo-busqueda">
+          <input
+            type="search"
+            id="busquedaRegistro"
+            placeholder="Buscar registro..."
+          />
+
+          <!-- Botón para buscar registro -->
+          <button type="button" onclick="buscarRegistro()">
+            Buscar Registro
+          </button>
+        </div>
+
+        <div class="estiloTabla">
+          <table>
+            <thead>
+              <tr>
+                <th>Nombre Estudiante</th>
+                <th>NIE</th>
+                <th>Grado</th>
+                <th>Sección</th>
+                <th>Servicio Social</th>
+                <th>Horas</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+
+            <!-- Contenedor de filas de la tabla -->
+            <tbody id="tablaAlumnos"></tbody>
+          </table>
+        </div>
+
+        <!-- Botón para abrir el formulario de registrar alumno -->
+        <button
+          type="button"
+          onclick="abrirFormulario(event)"
+          class="btnRegistrar"
+        >
+          Registrar Alumno
+        </button>
+
+        <!-- Botón para abrir el formulario de registrar latas -->
+        <button
+          type="button"
+          onclick="abrirFormularioLatas(event)"
+          class="btnRegistrar"
+          style="background-color: #ff9900; margin-left: 10px"
+        >
+          Registrar Latas
+      </button>
+
+        <!-- Formulario para agregar nuevo alumno -->
+        <div id="registro" class="sistemaRegistro">
+          <form
+            id="formularioAlumno"
+            autocomplete="off"
+            onsubmit="registrarAlumno(event)"
+          >
+            <input type="text" id="nombre" placeholder="Nombre" required />
+            <input type="text" id="apellido" placeholder="Apellido" required />
+            <input type="text" id="nie"placeholder="NIE" required maxlength="8"/>
+
+            <select id="grado" required>
+              <option value="" disabled selected hidden>Grado</option>
+              <option value="2° DS">2° DS</option>
+              <option value="2° G">2° G</option>
+            </select>
+
+            <select id="seccion" required>
+              <option value="" disabled selected hidden>Sección</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+            </select>
+
+            <select id="servicio" required>
+              <option value="" disabled selected hidden>Servicio social</option>
+              <option value="Banda">Banda</option>
+              <option value="Jardinería">Jardinería</option>
+              <option value="Reciclaje">Reciclaje</option>
+              <option value="Protocolo">Protocolo</option>
+            </select>
+
+            <!-- Horario del servicio: se guarda en la tabla registros (opcional) -->
+            <label class="campoFormulario"
+              >Hora de entrada
+              <input type="time" id="horaEntradaRegistro" placeholder="Hora de entrada" />
+            </label>
+            <label class="campoFormulario"
+              >Hora de salida
+              <input type="time" id="horaSalidaRegistro" placeholder="Hora de salida" />
+            </label>
+
+            <input
+              type="text"
+              id="horas"
+              placeholder="Horas"
+              inputmode="decimal"
+              required
+            />
+
+            <input
+              type="text"
+              id="estado"
+              placeholder="Estado"
+              readonly
+              required
+              tabindex="-1"
+              style="cursor: default"
+            />
+
+            <button type="submit">Registrar</button>
+          </form>
+        </div>
+
+        <!-- Formulario para Registro de Latas -->
+        <div id="registroLatas" class="sistemaRegistro" style="display: none">
+          <form id="formularioLatas" autocomplete="off">
+            <h3>Registrar Latas</h3>
+
+            <input
+              type="text"
+              id="nieLatas"
+              placeholder="NIE del estudiante"
+              inputmode="numeric"
+              maxlength="8"
+              required
+            />
+
+            <input
+              type="number"
+              step="0.1"
+              id="pesoLatas"
+              placeholder="Peso de latas (lbs)"
+              required
+            />
+
+            <input
+              type="text"
+              id="horasCalculadas"
+              placeholder="Horas equivalentes"
+              readonly
+              style="background-color: #e9ecef; cursor: not-allowed"
+            />
+
+            <button type="submit">Sumar Horas</button>
+          </form>
+        </div>
+      </section>
+
+      <section id="Grados" class="principalSistema">
+        <div id="vistaTarjetasGrados" class="grid-tarjetas">
+          <!-- Botón para agregar un nuevo grado -->
+          <div
+            class="tarjeta-opcion"
+            id="btnAnadirGrado"
+            style="cursor: pointer"
+          >
+            <div class="tarjeta-icono">
+              <img src="../img/MAS.png" alt="Añadir" />
+            </div>
+            <div class="tarjeta-texto">Añadir</div>
+          </div>
+
+          <!-- Tarjetas de grados -->
+          <div
+            class="tarjeta-opcion tarjeta-grado"
+            data-grado="2° DS"
+            data-seccion="A"
+            style="cursor: pointer"
+          >
+            <div class="tarjeta-icono">
+              <img src="../img/COMPU.png" alt="Computadora" />
+            </div>
+            <div class="tarjeta-texto">2° DS "A"</div>
+          </div>
+
+          <div
+            class="tarjeta-opcion tarjeta-grado"
+            data-grado="2° G"
+            data-seccion="A"
+            style="cursor: pointer"
+          >
+            <div class="tarjeta-icono">
+              <img src="../img/ABIERTO.png" alt="Libro Abierto" />
+            </div>
+            <div class="tarjeta-texto">2° G "A"</div>
+          </div>
+
+          <div
+            class="tarjeta-opcion tarjeta-grado"
+            data-grado="2° G"
+            data-seccion="B"
+            style="cursor: pointer"
+          >
+            <div class="tarjeta-icono">
+              <img src="../img/CERRADO.png" alt="Libro Cerrado" />
+            </div>
+            <div class="tarjeta-texto">2° G "B"</div>
+          </div>
+        </div>
+
+        <div id="vistaDetalleGrado" style="display: none">
+          <button
+            type="button"
+            id="btnVolverGrados"
+            class="btnVolverAlertas"
+            style="margin-bottom: 15px; cursor: pointer"
+          >
+            <i class="fas fa-arrow-left"></i> Volver
+          </button>
+          <h2 id="tituloGradoSeleccionado">Alumnos del Grado</h2>
+          <div class="estiloTabla" style="margin-top: 15px">
+            <table>
+              <thead>
+                <tr>
+                  <th>Estudiantes</th>
+                  <th>NIE</th>
+                  <th>Servicio Social</th>
+                  <th>Horas</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tablaAlumnosGrado"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="Alertas" class="principalSistema">
+        <div id="vistaTarjetasAlertas" class="grid-tarjetas">
+          <div
+            class="tarjeta-opcion"
+            id="btnHorasCompletas"
+            style="cursor: pointer"
+          >
+            <div class="tarjeta-icono">
+              <img src="../img/check.jfif" alt="Completas" />
+            </div>
+            <div class="tarjeta-texto">Horas completas</div>
+          </div>
+
+          <div
+            class="tarjeta-opcion"
+            id="btnHorasIncompletas"
+            style="cursor: pointer"
+          >
+            <div class="tarjeta-icono">
+              <img src="../img/x.png" alt="Incompletas" />
+            </div>
+            <div class="tarjeta-texto">Horas incompletas</div>
+          </div>
+        </div>
+
+        <div id="vistaHorasCompletas" style="display: none">
+          <button
+            type="button"
+            class="btnVolverAlertas"
+            style="margin-bottom: 15px; cursor: pointer"
+          >
+            <i class="fas fa-arrow-left"></i> Volver
+          </button>
+          <h2>Alumnos con horas completadas</h2>
+          <div class="estiloTabla" style="margin-top: 15px">
+            <table>
+              <thead>
+                <tr>
+                  <th>
+                    <input
+                      type="checkbox"
+                      class="chkTodos"
+                      data-tabla="tablaAlumnosCompletados"
+                      title="Seleccionar todos"
+                      checked
+                    />
+                  </th>
+                  <th>Estudiantes</th>
+                  <th>NIE</th>
+                  <th>Horas</th>
+                  <th>Grado</th>
+                  <th>Sección</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tablaAlumnosCompletados"></tbody>
+            </table>
+          </div>
+          <button
+            type="button"
+            id="btnEnviarAlertaCompletados"
+            class="btnRegistrar"
+            style="margin-top: 20px"
+          >
+            Enviar Alerta
+          </button>
+        </div>
+
+        <div id="vistaHorasIncompletas" style="display: none">
+          <button
+            type="button"
+            class="btnVolverAlertas"
+            style="margin-bottom: 15px; cursor: pointer"
+          >
+            <i class="fas fa-arrow-left"></i> Volver
+          </button>
+          <h2>Alumnos con horas pendientes</h2>
+          <div class="estiloTabla" style="margin-top: 15px">
+            <table>
+              <thead>
+                <tr>
+                  <th>
+                    <input
+                      type="checkbox"
+                      class="chkTodos"
+                      data-tabla="tablaAlumnosIncompletos"
+                      title="Seleccionar todos"
+                      checked
+                    />
+                  </th>
+                  <th>Estudiantes</th>
+                  <th>NIE</th>
+                  <th>Horas</th>
+                  <th>Grado</th>
+                  <th>Sección</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tablaAlumnosIncompletos"></tbody>
+            </table>
+          </div>
+
+          <button
+            type="button"
+            id="btnEnviarAlertaIncompletos"
+            class="btnRegistrar"
+            style="margin-top: 20px"
+          >
+            Enviar Alerta
+          </button>
+        </div>
+      </section>
+
+      <section id="Proyectos" class="principalSistema">
+        <div class="grid-tarjetas-proyectos">
+          <div class="tarjeta-proyecto">
+            <h3 class="titulo-proyecto">Banda</h3>
+            <div class="tabla-mini-contenedor">
+              <table class="tabla-mini">
+                <thead>
+                  <tr>
+                    <th>Estudiante</th>
+                    <th>Horas</th>
+                    <th>Grado</th>
+                    <th>Sección</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="tarjeta-proyecto">
+            <h3 class="titulo-proyecto">Jardinería</h3>
+            <div class="tabla-mini-contenedor">
+              <table class="tabla-mini">
+                <thead>
+                  <tr>
+                    <th>Estudiante</th>
+                    <th>Horas</th>
+                    <th>Grado</th>
+                    <th>Sección</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="tarjeta-proyecto">
+            <h3 class="titulo-proyecto">Reciclaje</h3>
+            <div class="tabla-mini-contenedor">
+              <table class="tabla-mini">
+                <thead>
+                  <tr>
+                    <th>Estudiante</th>
+                    <th>Horas</th>
+                    <th>Grado</th>
+                    <th>Sección</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="tarjeta-proyecto">
+            <h3 class="titulo-proyecto">Protocolo</h3>
+            <div class="tabla-mini-contenedor">
+              <table class="tabla-mini">
+                <thead>
+                  <tr>
+                    <th>Estudiante</th>
+                    <th>Horas</th>
+                    <th>Grado</th>
+                    <th>Sección</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="Asistencia" class="principalSistema">
+        <div class="asistenciaFiltros">
+          <label
+            >Fecha
+            <input type="date" id="asistFecha" />
+          </label>
+          <label
+            >Grado y sección
+            <select id="asistGrado"></select>
+          </label>
+        </div>
+
+        <div class="estiloTabla">
+          <table>
+            <thead>
+              <tr>
+                <th>Estudiante</th>
+                <th>NIE</th>
+                <th>
+                  <input
+                    type="checkbox"
+                    id="asistTodos"
+                    title="Marcar a todos como asistieron"
+                  />
+                  Asistió
+                </th>
+              </tr>
+            </thead>
+            <tbody id="tablaAsistencia">
+              <tr>
+                <td colspan="3">Elige una fecha y un grado.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="asistenciaFooter">
+          <button type="button" id="btnAsistGuardar" class="btnRegistrar">
+            Guardar asistencia
+          </button>
+          <button type="button" id="btnAbrirFormAsistencia" class="btnRegistrar" style="margin-left: 10px">
+              Tomar Asistencia
+          </button>
+          <!-- Botón para ver los registros de un día (hoy o fechas anteriores) -->
+          <button
+            type="button"
+            onclick="abrirRegistrosDia(event)"
+            class="btnRegistrar"
+            id="btnRegistrosDia"
+            style="margin-left: 10px"
+          >
+            Registros del día
+          </button>
+          <span id="asistContador"></span>
+        </div>
+        
+        <!-- Formulario para registrar asistencia manual -->
+        <div id="formularioAsistenciaManual" class="sistemaRegistro" style="display: none">
+          <form
+            id="formAsistenciaManual"
+            autocomplete="off"
+            onsubmit="registrarAsistenciaManual(event)"
+          >
+            <input type="text" id="asistManualNombre" placeholder="Nombre del estudiante" required />
+            <input type="text" id="asistManualNIE" placeholder="NIE del estudiante" required maxlength="8" inputmode="numeric" />
+            <label class="campoFormulario">Fecha
+              <input type="date" id="asistManualFecha" required />
+            </label>
+            <label class="campoFormulario">Hora de entrada
+              <input type="time" id="asistManualEntrada" required />
+            </label>
+            <label class="campoFormulario">Hora de salida
+              <input type="time" id="asistManualSalida" required />
+            </label>
+            
+            <select id="asistManualGrado" required>
+              <option value="" disabled selected hidden>Grado</option>
+              <option value="2° DS">2° DS</option>
+              <option value="2° G">2° G</option>
+            </select>
+            
+            <select id="asistManualSeccion" required>
+              <option value="" disabled selected hidden>Sección</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+            </select>
+            
+            <select id="asistManualServicio" required>
+              <option value="" disabled selected hidden>Servicio social</option>
+              <option value="Banda">Banda</option>
+              <option value="Jardinería">Jardinería</option>
+              <option value="Reciclaje">Reciclaje</option>
+              <option value="Protocolo">Protocolo</option>
+            </select>
+            
+            <button type="submit" class="btn-guardar">Guardar Asistencia</button>
+          </form>
+        </div>
+        
+        <!-- Registros del día: arranca en la fecha de hoy y se puede elegir un día anterior -->
+        <div id="registroDia" class="panelDia" style="display: none">
+          <div class="panelDiaFiltros">
+            <label for="diaFecha">Fecha</label>
+            <input type="date" id="diaFecha" />
+            <button type="button" id="diaHoy">Hoy</button>
+            <span id="diaResumen" class="chipAsistencia"></span>
+          </div>
+          <div class="estiloTabla">
+            <table>
+              <thead>
+                <tr>
+                  <th>Nombre Estudiante</th>
+                  <th>NIE</th>
+                  <th>Grado</th>
+                  <th>Sección</th>
+                  <th>Servicio Social</th>
+                  <th>Entrada</th>
+                  <th>Salida</th>
+                </tr>
+              </thead>
+              <tbody id="tablaDia"></tbody>
+            </table>
+          </div>
+      </section>
+   <section id="Validaciones" >
+      <div class="tarjetaVal">
+        <h1>Validacion para imprimir</h1>
+        <button onclick="AbrirTarjeta('validacion')">Abrir validación</button>
+      </div>
+      <div id="tarjetaValidacion" class="modal">
+        <div class="valDoc">
+          <h2>Validación para imprimir</h2>
+          <p>Para que el estudiante pueda finalizar su servicio social</p>
+
+          <label for="selectValidacion"><strong>Estudiante con horas completas:</strong></label>
+          <select id="selectValidacion">
+            <option value="">Selecciona un estudiante...</option>
+          </select>
+          <p id="mensajeValidacion"></p>
+
+          <h1>VALIDACIÓN DE HORAS SOCIALES</h1>
+
+          <div class="valInfo">
+            <p><strong>Nombre del estudiante:</strong> <span class="valCampo" id="valNombre"></span></p>
+            <p><strong>NIE:</strong> <span class="valCampo" id="valNie"></span></p>
+            <p><strong>Horas completadas:</strong> <span class="valCampo" id="valHoras"></span></p>
+            <p><strong>Fecha de finalización:</strong> <span class="valCampo" id="valFecha"></span></p>
+            <p><strong>Proyecto/Servicio Social:</strong> <span class="valCampo" id="valServicio"></span></p>
+          </div>
+
+          <div class="valFirma">
+            <p>_________________________</p>
+            <p><strong>Firma del Coordinador</strong></p>
+            <p>Fecha: <span class="valCampo"></span></p>
+          </div>
+          <p class="valNota">Este documento certifica que el estudiante ha completado satisfactoriamente sus horas sociales.</p>
+
+          <div class="valBotones">
+            <button id="btnCerrarTarjeta">Cerrar</button>
+            <button id="btnCrearWord" disabled>Descargar Archivo</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal para Añadir Grado -->
+    <div id="modalGrado" class="modal">
+      <div class="modal-contenido">
+        <span class="cerrar-modal" id="btnCerrarModal">&times;</span>
+        <h2>Añadir Nuevo Grado</h2>
+        <form id="formularioGrado">
+          <input
+            type="text"
+            id="nombreGrado"
+            placeholder="Ej. 2° DS"
+            required
+          />
+          <input type="text" id="seccionGrado" placeholder="Ej. B" required />
+
+          <select id="iconoGrado" required>
+            <option value="../img/COMPU.png">Computadora</option>
+            <option value="../img/ABIERTO.png">Libro Abierto</option>
+            <option value="../img/CERRADO.png">Libro Cerrado</option>
+            <option value="../img/salud.png">Salud</option>
+          </select>
+
+          <button type="submit" class="btn-guardar">Guardar Grado</button>
+        </form>
+      </div>
+    </div>
+    
+    </main>
+    <script src="../js/sistema.js"></script>
+    <script src="../js/asistencia.js"></script>
+    <script src="../js/registros_dia.js"></script>
+  </body>
+</html>
